@@ -1,0 +1,70 @@
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>MakeFriends</ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-click="showMenuFun()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="icon ion-navicon"></i>
+    </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="MakeFriends" hide-nav-bar="false">
+  <ion-content class="padding has-header">
+   <ion-refresher
+    pulling-text="下拉刷新..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+<!--<person-info></person-info>-->
+      <div class="list" id="makefriendsmenu" ng-if="showmenu" style="position: absolute;right:0">
+        <div class="item item-divider" style="background-color: #007aff">条件选择:</div>
+        <ion-radio name="condition" radio-color="balanced" ng-model="defaultchoose" ng-click="defaultchooseFun()">默认</ion-radio>
+        <!--<ion-radio name="condition" radio-color="balanced" ng-click="sexchooseFun()">按性别选择</ion-radio>-->
+          <div class="item item-divider" ng-click="sexchooseFun()">按性别选择</div>
+          <div ng-if="sexchoose">
+              <ion-radio name="condition" radio-color="balanced"  ng-model="sexchoose0">0</ion-radio>
+              <ion-radio name="condition" radio-color="balanced"  ng-model="sexchoose1">1</ion-radio>
+          </div>
+        <!--<ion-radio name="condition" radio-color="balanced" ng-model="agechoose" ng-click="agechooseFun()">按年龄选择</ion-radio>-->
+          <div class="item item-divider" ng-click="agechooseFun()">按年龄选择</div>
+          <ion-radio name="condition" radio-color="balanced"  ng-model="agechoose" ng-hide="true"></ion-radio>
+          <div ng-if="agechoose" style="overflow: auto">
+              <input type="number" value="" placeholder="开始年龄" style="padding-left:20px"/>
+              <input type="number" value="" placeholder="结束年龄" style="padding-left:20px"/>
+          </div>
+          <div class="item item-divider" style="background-color:#007aff ">排序:</div>
+        <ion-radio name="order" radio-color="balanced" ng-model="noneoredr">默认</ion-radio>
+        <ion-radio name="order" radio-color="balanced" ng-model="distanceorder">按距离排序</ion-radio>
+        <ion-radio name="order" radio-color="balanced" ng-model="recommandorder">推荐排序</ion-radio>
+    </div>
+    <div class="row" ng-repeat="row in rows track by $index">
+    <div ng-repeat="item in items" ng-if="indexInRange($index,$parent.$index)">
+      <div class="personInfo">
+        <a ui-sref="tab.personHome">
+          <img class="col-80 col-offset-10" src="img/p1.jpg" alt=""/>
+        </a>
+        <p>xxxxxx</p>
+      </div>
+    </div>
+    </div>
+	<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="20%" immediate-check="false"><ion-spinner class="dots"></ion-spinner></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
+
+<style>
+  div p{
+    text-align: center;
+    color:#ffffff;
+  }
+  div img{
+    padding-top: 10px;
+  }
+  .row{
+
+  }
+  .personInfo{
+    background-color:#222222 ;
+    margin-left:2px;
+    margin-right:2px;
+    margin-top:2px;
+    margin-bottom: 2px;
+  }
+</style>

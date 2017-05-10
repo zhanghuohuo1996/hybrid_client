@@ -1,0 +1,95 @@
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>Settings</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="backToAccount()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="settings">
+  <ion-content class="has-header">
+    <ul class="list">
+      <li class="item item-toggle">
+        省流量模式
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.flow"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        地理位置共享
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.geolocation"/>
+           <div class="track">
+           <div class="handle"></div>
+           </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        允许他人向我加好友
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.addFriend"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        允许他人看我的朋友圈
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.allowOtherInto"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        允许方向变换
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.orientation"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        勿扰模式
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="setting.notDisturb"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+    </ul>
+
+		<div class="item item-range range-positive">
+    <i class="icon ion-volume-low"></i>
+    <input type="range" name="volume" ng-model="volumevalue" min="0" max="100">
+    <i class="icoan ion-volume-high"></i>
+      <span>{{volumevalue}}</span>
+  </div>
+		<div class="item item-range range-positive">
+			<i class="icon ion-ios-sunny-outline"></i>
+			<input type="range" name="sunny" ng-model="sunnyvalue" min="0" max="100">
+			<i class="icoan ion-ios-sunny"></i>
+      <span>{{sunnyvalue}}</span>
+		</div>
+
+		<button class="button button-full button-energized">
+		清理内存空间
+		</button>
+  </ion-content>
+</ion-view>
+<style>
+ .item-range input{
+    width:80%;!important;
+  }
+ /* div{
+    cursor:url('http://ionicframework.com/img/finger.png'),auto;
+  }*/
+
+</style>

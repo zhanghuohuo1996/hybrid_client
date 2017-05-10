@@ -1,0 +1,37 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>News</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="backToNews()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="" hide-tabs>
+  <ion-content class="padding has-header">
+    <div style="border-bottom:2px solid #e2e2e2;padding-bottom:10px">
+		<h4 style="padding-bottom:10px;font-weight:bold">{{content.newsTitle}}</h4>
+		<div style="position:relative"><i style="color:#529df9" class="ion-social-buffer"></i><span> {{content.newsAuthor}}</span><span style="color:#529df9;position:absolute;right:0">{{content.newsTime}}</span></div>
+	</div>
+	<div style="margin-top:10px;margin-bottom:10px">
+		<img src="{{content.newsImage}}" style="width:100%;height:auto"/>
+	</div>
+	<div ng-click="touchTheContent()">
+	{{content.newsContent}}
+	</div>
+	
+  </ion-content>
+</ion-view>
+<ion-footer-bar ng-if="showWriteComment" class="bar bar-footer" style="width:100%;vertical-align:middle;padding-top:8px;background-color:#e2e2e2;border-top:2px solid #b2b2b0">
+		<input type="search" style="width:80%;height:30px;padding-left:10px;padding-right:10px;float:left;vertical-align:middle" placeholder="写评论"/>
+		<div style="margin-left:10px;line-height:30px;position:relative">
+		<a href=""><i style="display:block;width:auto;height:30px;color:red;margin-right:10px" class="ion-android-textsms"></i></a>
+		<div style="float:right;position:absolute;left:10px;top:0;color:red;padding-left:5px">{{content.newsCommentCount}}</div>
+		</div>
+</ion-footer-bar>

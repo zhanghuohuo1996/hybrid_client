@@ -1,0 +1,32 @@
+<div id="bg" ng-click="closeModal()">
+<ion-pane id="modalBg">
+<ion-list id="modalList">
+    <ion-item ng-click="markMessage()">
+        <h2>标为已读</h2>
+    </ion-item>
+    <ion-item ng-click="topMessage()">
+        <h2>置顶聊天</h2>
+    </ion-item>
+    <ion-item ng-click="deleteMessage()">
+        <h2>删除该聊天</h2>
+    </ion-item>
+</ion-list>
+</ion-pane>	
+<div>
+<style>
+	#modalList{
+		position:fixed;
+		top:35%;
+		width:60%;
+		left:20%;
+	}
+	#modalList ion-item{
+		text-align:center;
+	}
+	#modalBg{
+		background:rgba(0,0,0,0.5);
+	}
+	#bg{
+		background:transparent;
+	}
+</style>

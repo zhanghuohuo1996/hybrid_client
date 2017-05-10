@@ -1,0 +1,217 @@
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>编辑资料</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="backToMyHome()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-click="">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i ng-click="doneEditInfomation()">Done</i>
+    </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="编辑资料" hide-tabs>
+  <ion-content class="has-header padding">
+	<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:auto;" ng-click="">
+	<div style="float:left;line-height:50px;padding-left:10px;"><span>更换头像</span></div>
+	<img style="position:absolute;right:30px;width:40px;height:40px;border-radius:40px;margin-top:5px;" src="img/p14.jpg"></img>
+	<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+	</div>
+	<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:auto;" ng-click="">
+	<div style="float:left;line-height:50px;padding-left:10px;"><span>修改昵称</span></div>
+	<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">zhangsan</p>
+	<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+	</div>
+	<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:auto;" ng-click="">
+	<div style="float:left;line-height:50px;padding-left:10px;"><span>修改昵称</span></div>
+	<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">zhangsan</p>
+	<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+	</div>
+  </ion-content>
+</ion-view>
+
+<script id="image-modal.html" type="text/ng-template">
+              <div class="modal image-modal modaltransparent" ng-click="closeModal()">
+                  <ion-pane class="transparent">
+                     <img ng-src="{{imageSrc}}" on-hold="showSaveOrDelete()" class="fullscreen-image" style="opacity:1.0"/>
+                  </ion-pane>
+              </div>
+			   <style>
+			   .modaltransparent{
+					background:transparent;
+			   }
+				.transparent {
+					background:rgba(0,0,0,0.5);
+				}
+				.image-modal {
+				  width: 100% !important;
+				  height: 100%;
+				  top: 0 !important;
+				  left: 0 !important;
+				}
+				.fullscreen-image {
+				  max-width: 100%;
+				  max-height: 100%;
+				  bottom: 0;
+				  left: 0;
+				  margin: auto;
+				  overflow: auto;
+				  position: fixed;
+				  right: 0;
+				  top: 0;
+				}
+		</style>
+          </script>
+		  
+		  <style>
+			.alreadyGood{
+				color:red;
+			}
+		  </style>
+		  
+	
+	
+		  
+<style>
+	.hide{
+		display:none;
+	}
+	.sharegroup a img{
+		margin:0 0;
+	}
+	.sharegroup a{
+		float:left;
+		margin-right:10px;
+	}
+	.sharegroup{
+		position:absolute;
+		right:20px;
+		top:10px;
+		overflow:auto;
+	}
+	#personTag{
+		width:100%;
+		margin:0 auto;
+	}
+	.tag div{
+		display:inline-block;
+		color:#c0c0c0;
+	}
+	.tag{
+		border:1px solid #444444;
+		width:50px;
+		height:20px;
+		display:inline-block;
+		margin-bottom:10px;
+		margin-left:20px;
+		margin-right:20px;
+		border-radius:10px;
+		text-align:center;
+	}	
+	#personTag{
+		border:2px dashed #529df9;
+		padding-left:20px;
+		padding-bottom:10px;
+		vertical-align:middle;
+	}
+	#mytag{
+		margin-top:10px;
+		margin-bottom:10px;
+		color:#c0c0c0;
+	}
+	#personInfomation{
+		height:100px;
+		vertical-align:middle;
+		border:2px dashed #529df9;
+		padding-left:20px;
+		padding-bottom:20px;
+		margin-bottom:10px;
+	}
+	#myinfomation{
+		margin-top:10px;
+		margin-bottom:10px;
+		color:#c0c0c0;
+	}
+	.personspan1{
+		display:inline-block;
+		color:#c0c0c0;
+	}
+	.personspan{
+		width:100px;
+		display:inline-block;
+	}
+</style>
+<style>
+
+	#touxiang,#name,#title{
+		text-align:center;
+		margin-bottom:10px;
+	}
+	#tag{
+		text-align:center;
+	}
+	#touxiang img{
+		width:60px;
+		height:60px;
+		border-radius:30px;
+	}
+	#tag div{
+		float:left;
+		margin-right:20px;
+		background-color:#444444;
+		border-radius:10px;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#tag{
+		overflow:auto;
+		width:310px;
+		margin:0 auto;
+		color:white;
+		text-align:center;
+	}
+	#tag i{
+		margin-right:5px;
+	}
+	#personHomeTop{
+		background-color:#c9c9c9;
+		padding-top:10px;
+		padding-bottom:10px;
+	}
+	#title{color:black;}
+	#albumId div img{
+		float:left;
+		margin-right:5px;
+	}
+	#albumId{
+		overflow:auto;
+	}
+	#albumId{
+		width:100%;
+		margin:0 auto;
+	}
+	.shareButton{
+		float:right;
+		right:10px;
+		top:20px;
+		position:absolute;
+	}
+	.activityheader img{
+		width:50px;
+		height:50px;
+		float:left;
+		margin-left:20px;
+		margin-right:10px;
+		border-radius:50px;
+	}
+	.activityheader .timetext{
+		color:#c0c0c0;
+	}
+	.activityheader h4{
+		display:inline-block;
+		margin-top:10px;
+	}
+</style>

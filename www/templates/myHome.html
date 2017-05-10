@@ -1,0 +1,356 @@
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>MyHome</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="backToAccount()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+   <!-- <button class="button button-clear" ng-click="gotoEdit()">-->
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <!--<i>Edit</i>-->
+    <!--</button>-->
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="MyHome" hide-tabs>
+  <ion-content class="has-header">
+   <div id="personHomeTop">
+       <div id="touxiang" on-tap="changeTouxiang()"><img src="img/p13.jpg"/></div>
+	   <div id="name"><h3>{{user.name}} <i id="personLevel" class="badge badge-assertive">{{user.level}}级</i></h3></div>
+	   <div id="title"><p>{{user.title}}</p></div>
+	   <div id="tagparent">
+	   <div id="tag">
+			<div><i class="ion-ios-location"></i>{{user.province}}-{{user.city}}</div>
+			<div><i class="ion-ios-heart"></i>粉丝:{{user.loves}}</div>
+			<div><i class="ion-happy"></i>活跃度:{{user.activityDegree}}</div>
+	   </div>
+	   </div>
+   </div>
+   <div style="width:100%;height:50px;background-color:white">
+   <ion-tabs class="tabs-icon-only" >
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="相册" icon-off="ion-images" icon-on="ion-images" >
+    <ion-nav-view name="mytab-album">
+	<div style="margin-top:50px">
+	<div id="albumId" class="padding">
+		<div ng-repeat="photo in photos track by $index">
+			<img style="width:23%;height:auto;padding-bottom:5px;" src="img/p10.jpg" ng-click="showImage($index)" />
+		</div>  
+	</div>
+	</div>
+	</ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="动态" icon-off="ion-ios-compose" icon-on="ion-ios-compose" >
+    <ion-nav-view name="mytab-activity">
+	<div style="margin-top:50px">
+	<div class="padding">
+		<div class="list card activitySection" ng-repeat="activity in activitys track by $index">
+			<div class="activityheader">
+				<div style="positon:relative;">
+			
+				<div class="sharegroup animated bounceInRight hide">
+					<a ng-click="shareQQ()"><img style="width:20px;height:30px" src="img/circular-QQ.png"/></a>
+					<a ng-click="shareWeChat()"><img style="width:20px;height:30px" src="img/default-WeChat.png"/></a>
+					<a ng-click="shareWeibo()"><img style="width:20px;height:30px" src="img/default-Weibo.png"/></a>
+				</div>
+
+				<a class="shareButton" ng-click="showOptions($index)"><i class="ion-android-share-alt"></i></a>
+				</div>
+				<img src="img/p11.jpg"/>
+				<h4>{{user.name}}</h4>
+				<div class="timetext">2017.03.19</div>
+			</div>
+			<div class="item item-body">
+				<img class="full-image" src="img/img_small_2.jpg"/>
+				<p>总是不经意念错你的名字，才发现你早已离开。我能不能重新认识你，从你叫什么名字开始。</p>
+				<a ng-click="dianzan($index)" class="subdued"><i id="zan" class="ion-ios-star"></i></a>11 liked<span>&nbsp&nbsp&nbsp|&nbsp&nbsp</span>
+				<a ng-click="pinglun($index)" class="subdued"><i class="ion-android-textsms"></i></a> 26 comments
+				<a ng-click="deleteActivity($index)" class="subdued" style="float:right;"><i class="ion-trash-a"></i></a>
+			</div>
+		</div>
+	</div>
+	</div>
+	</ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab title="简介" icon-off="ion-android-contact" icon-on="ion-android-contact">
+    <ion-nav-view name="mytab-profile">
+	<div style="margin-top:50px" ng-if="noedit">
+	<div class="padding">
+		<div id="personInfomation">
+			<div id="myinfomation">我的信息:</div>
+			<div class="personspan"><span class="personspan1">身高 &nbsp</span><span>{{user.height}}cm</span></div>
+			<div class="personspan"><span class="personspan1">体重 &nbsp</span><span>{{user.weight}}kg</span></div>
+			<div class="personspan"><span class="personspan1">型号 &nbsp</span><span>{{user.sex}}</span></div>
+			<div class="personspan"><span class="personspan1">家乡 &nbsp</span><span>{{user.province}}</span></div>
+			<div class="personspan"><span class="personspan1">感情 &nbsp</span><span>{{user.emotionStatu}}</span></div>
+			<div class="personspan"><span class="personspan1">年龄 &nbsp</span><span>{{user.age}}岁</span></div>
+		</div>	
+		<div id="personTag">
+			<div id="mytag">我的标签:</div>
+			<div  class="tag" ng-repeat="tag in tags">
+				<div>{{tag}}</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div style="margin-top:50px" ng-if="edit">
+	<div class="padding">
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifyName()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改昵称</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.name}}</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifyHeight()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改身高</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.height}}cm</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifyWeight()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改体重</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.weight}}kg</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifySex()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改型号</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.sex}}</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifyCity()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改家乡</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.province}}-{{user.city}}</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;border-bottom:1px solid #e0e0e0;overflow:hidden;" ng-click="modifyEmotionStatu()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改感情</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.emotionStatu}}</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div style="position:relative;width:100%;heigh:50px;overflow:hidden;" ng-click="modifyAge()">
+			<div style="float:left;line-height:50px;padding-left:10px;"><span>修改年龄</span></div>
+			<p style="position:absolute;right:30px;height:40px;border-radius:40px;margin-top:5px;line-height:40px;color:#a0a0a0;">{{user.age}}岁</p>
+			<i style="position:absolute;right:8px;line-height:50px;color:#e0e0e0;" class="ion-chevron-right"></i>
+		</div>
+		<div id="personTag" style="border:1px solid #e0e0e0;">
+			<div id="modifytag">修改标签:</div>
+			<div  class="tag" ng-repeat="tag in alltags track by $index">
+				<div ng-click="chooseTag($index)">{{tag}}</div>
+			</div>
+		</div>
+	</div>
+	</div>
+		<button class="button button-full button-positive" ng-click="editInfomation()">
+			<span ng-if="noedit">编辑资料</span><span ng-if="edit">完成</span>			
+		</button>
+	</ion-nav-view>
+  </ion-tab>
+
+
+</ion-tabs>
+   </div>
+  </ion-content>
+</ion-view>
+<ion-footer-bar ng-if="showActivityComment" class="bar bar-footer" style="width:100%;vertical-align:middle;background-color:#e2e2e2;border-top:2px solid #b2b2b0">
+		<input id="activityCommentInput" type="search" style="width:80%;height:30px;padding-left:10px;padding-right:10px;float:left;vertical-align:middle" placeholder="写评论"/>
+		<div style="margin-left:10px;line-height:30px;position:relative">
+		<a ng-click="sendcomment()" style="width:20%;text-align:center;line-height:30px;height:30px"><p style="color:blue;font-weight:bold">发送</p></a>
+		</div>
+</ion-footer-bar>
+<script id="image-modal.html" type="text/ng-template">
+              <div class="modal image-modal modaltransparent" ng-click="closeModal()">
+                  <ion-pane class="transparent">
+                     <img ng-src="{{imageSrc}}" on-hold="showSaveOrDelete()" class="fullscreen-image" style="opacity:1.0"/>
+                  </ion-pane>
+              </div>
+			   <style>
+			   .modaltransparent{
+					background:transparent;
+			   }
+				.transparent {
+					background:rgba(0,0,0,0.5);
+				}
+				.image-modal {
+				  width: 100% !important;
+				  height: 100%;
+				  top: 0 !important;
+				  left: 0 !important;
+				}
+				.fullscreen-image {
+				  max-width: 100%;
+				  max-height: 100%;
+				  bottom: 0;
+				  left: 0;
+				  margin: auto;
+				  overflow: auto;
+				  position: fixed;
+				  right: 0;
+				  top: 0;
+				}
+		</style>
+          </script>
+		  
+		  <style>
+			.alreadyGood{
+				color:red;
+			}
+		  </style>
+		  
+		  
+		  
+<style>
+	
+	#tag div{
+		width:100px;
+		overflow:auto;
+	}
+	.hide{
+		display:none;
+	}
+	.sharegroup a img{
+		margin:0 0;
+	}
+	.sharegroup a{
+		float:left;
+		margin-right:10px;
+	}
+	.sharegroup{
+		position:absolute;
+		right:20px;
+		top:15px;
+		overflow:auto;
+	}
+	#personTag{
+		width:100%;
+		margin:0 auto;
+	}
+	.tag div{
+		display:inline-block;
+		color:#c0c0c0;
+	}
+	.tag{
+		border:1px solid #444444;
+		width:50px;
+		height:20px;
+		display:inline-block;
+		margin-bottom:10px;
+		margin-left:20px;
+		margin-right:20px;
+		border-radius:10px;
+		text-align:center;
+	}
+	.chooseTag{
+		background-color:#ff5b32;
+	}
+	#personTag{
+		border:2px dashed #529df9;
+		padding-left:20px;
+		padding-bottom:10px;
+		vertical-align:middle;
+	}
+	#mytag{
+		margin-top:10px;
+		margin-bottom:10px;
+		color:#c0c0c0;
+	}
+	#modifytag{
+		margin-top:10px;
+		margin-bottom:10px;
+		color:#c0c0c0;
+	}
+	#personInfomation{
+		height:100px;
+		vertical-align:middle;
+		border:2px dashed #529df9;
+		padding-left:10px;
+		padding-bottom:20px;
+		margin-bottom:10px;
+	}
+	#myinfomation{
+		margin-top:10px;
+		margin-bottom:10px;
+		color:#c0c0c0;
+	}
+	.personspan1{
+		display:inline-block;
+		color:#c0c0c0;
+	}
+	.personspan{
+		width:100px;
+		display:inline-block;
+	}
+</style>
+<style>
+	#touxiang,#name,#title{
+		text-align:center;
+		margin-bottom:10px;
+	}
+	#tag{
+		text-align:center;
+	}
+	#touxiang img{
+		width:60px;
+		height:60px;
+		border-radius:30px;
+	}
+	#tag div{
+		float:left;
+		margin-right:10px;
+		background-color:#444444;
+		border-radius:10px;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	#tag{
+		overflow:auto;
+		width:350px;
+		margin:0 auto;
+		color:white;
+		text-align:center;
+	}
+	#tag i{
+		margin-right:5px;
+	}
+	#personHomeTop{
+		background-color:#c9c9c9;
+		padding-top:10px;
+		padding-bottom:10px;
+	}
+	#title{color:black;}
+	#albumId div img{
+		float:left;
+		margin-right:5px;
+	}
+	#albumId{
+		overflow:auto;
+	}
+	#albumId{
+		width:100%;
+		margin:0 auto;
+	}
+	.shareButton{
+		float:right;
+		right:10px;
+		top:20px;
+		position:absolute;
+	}
+	.activityheader img{
+		width:50px;
+		height:50px;
+		float:left;
+		margin-left:20px;
+		margin-right:10px;
+		border-radius:50px;
+	}
+	.activityheader .timetext{
+		color:#c0c0c0;
+	}
+	.activityheader h4{
+		display:inline-block;
+		margin-top:10px;
+	}
+</style>

@@ -1,0 +1,23 @@
+<ion-nav-bar class="bar-positive">
+   <ion-nav-title>News</ion-nav-title>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+<ion-view view-title="News" hide-nav-bar="false" >
+  <ion-content class="has-header">
+   <ion-refresher
+    pulling-text="下拉刷新..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+    <div class="list">
+    <div ng-repeat="item in newsItems">
+      <a class="item item-thumbnail-left" ng-href="news/newsId={{$index}}" ui-sref="tab.news-detail({'newsId':$index})">
+        <img src="img/p2.jpg">
+        <h2>Pretty Hate Machine</h2>
+        <p>Nine Inch NailsNine Inch NailsNine Inch NailsNine Inch NailsNine Inch NailsNine Inch NailsNine Inch Nails</p>
+      </a>
+    </div>
+    </div>
+		<ion-infinite-scroll ng-if="moredata" on-infinite="loadMore()" distance="20%" immediate-check="false"><ion-spinner class="dots"></ion-spinner></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,38 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-nav-bar class="bar-positive">
+  <ion-nav-title>{{friend.name}}</ion-nav-title>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" ng-click="backToChat()">
+      <!--<a ui-sref="tab.account.setting(userId)"><i class="ion-ios-gear"></i></a>-->
+      <i class="ion-arrow-left-a"></i>
+    </button>
+  </ion-nav-buttons>
+</ion-nav-bar>
+<ion-view view-title="" hide-tabs>
+  <ion-content class="padding has-header">
+  <div ng-repeat="message in messages" style="padding-bottom:30px;">
+  <div style="display:block;overflow:hidden;margin-bottom:5px;margin-top:5px;" ng-if="!message.fromme">
+  <img style="width:30px;height:30px;float:left;margin-right:5px;" src="img/p1.jpg"/>
+  <span style="float:left;max-width:150px;word-wrap:break-word;background-color:#0e78ea;padding:10px 5px 0px 5px;border-radius:5px;"><p style="color:white;">{{message.content}}</p><span>
+  </div>
+  <div style="display:block;overflow:hidden;margin-bottom:5px;margin-top:5px;" ng-if="message.fromme">
+  <img style="width:30px;height:30px;float:right;margin-left:5px;" src="img/p2.jpg"/>
+  <span style="float:right;max-width:150px;word-wrap:break-word;background-color:#0e78ea;padding:10px 5px 0px 5px;border-radius:5px;"><p style="color:white;">{{message.content}}</p><span>
+  </div>
+  </div>
+  </ion-content>
+</ion-view>
+<ion-footer-bar ng-if="true" class="bar bar-footer" style="width:100%;vertical-align:middle;padding-top:8px;background-color:#e2e2e2;border-top:2px solid #b2b2b0">
+		<a style="height:30px;width:30px;text-align:center;line-height:30px;"><i class="ion-ios-mic"></i></button></a>
+		<input id="messageValue" type="search" style="width:80%;height:25px;padding-left:10px;padding-right:25px;float:left;vertical-align:middle" placeholder=""/>
+		<a style="position:absolute;right:35px;width:30px;text-align:center;line-height:30px;"><i class="ion-happy-outline"></i></a>
+		<div style="margin-left:10px;line-height:30px;position:relative">
+		<a style="display:block;width:auto;height:30px;color:red;margin-right:10px" ng-click="sendMessage()"><i class="ion-android-send"></i></a>
+		<div style="float:right;position:absolute;left:10px;top:0;color:red;padding-left:5px">{{content.newsCommentCount}}</div>
+		</div>
+</ion-footer-bar>
